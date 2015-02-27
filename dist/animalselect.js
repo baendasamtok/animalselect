@@ -99,7 +99,7 @@
 
 			if (_selected) {
 				_.each(_selected, function(item, index) {
-					$('#animals_select_1 option[value="'+item['NUMER']+'"]').prop('selected',true)
+					$('#animals_select_1 option[value="' + item['NUMER'] + '"]').prop('selected', true)
 					rightList.push(item)
 					leftList = remove_from_list(leftList, item['NUMER'])
 				})
@@ -123,24 +123,24 @@
 			// add zeroes to lambanumer
 			filter1.on("keydown", function() {
 				if (event.keyCode == 13 && filter_type == "LAMBANUMER") {
-					if(filter1.val().length == 1){
-						filter1.val( "000"+filter1.val() )
-					}else if(filter1.val().length == 2){
-						filter1.val( "00"+filter1.val() )
-					}else if(filter1.val().length == 3){
-						filter1.val( "0"+filter1.val() )
+					if (filter1.val().length == 1) {
+						filter1.val("000" + filter1.val())
+					} else if (filter1.val().length == 2) {
+						filter1.val("00" + filter1.val())
+					} else if (filter1.val().length == 3) {
+						filter1.val("0" + filter1.val())
 					}
 				}
 			});
 
 			filter2.on("keydown", function() {
 				if (event.keyCode == 13 && filter_type == "LAMBANUMER") {
-					if(filter2.val().length == 1){
-						filter2.val( "000"+filter2.val() )
-					}else if(filter2.val().length == 2){
-						filter2.val( "00"+filter2.val() )
-					}else if(filter1.val().length == 3){
-						filter2.val( "0"+filter2.val() )
+					if (filter2.val().length == 1) {
+						filter2.val("000" + filter2.val())
+					} else if (filter2.val().length == 2) {
+						filter2.val("00" + filter2.val())
+					} else if (filter1.val().length == 3) {
+						filter2.val("0" + filter2.val())
 					}
 				}
 			});
@@ -151,9 +151,9 @@
 				if (event.keyCode != 8 && filter_type == "VALNR" && /^\d{2}$/.test(filter1.val())) {
 					filter1.val(filter1.val() + '-')
 				}
-	
+
 				if (event.keyCode == 13) {
-					setTimeout(function() {		// timeout to give above listener time to add zeroes to lambanumer
+					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
 						$('#animals_select_1 option').prop('selected', 'selected');
 						var selectedItems = select1.find('option:selected')
 						select2.prepend(selectedItems);
@@ -174,7 +174,7 @@
 				}
 
 				if (event.keyCode == 13) {
-					setTimeout(function() {		// timeout to give above listener time to add zeroes to lambanumer
+					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
 						$('#animals_select_2 option').prop('selected', 'selected');
 						var selectedItems = select2.find('option:selected')
 						select1.prepend(selectedItems);
@@ -413,7 +413,7 @@
 				else if (a.text < b.text) return -1;
 				else return 0
 			})
-		//replace with sorted my_options;
+			//replace with sorted my_options;
 		$(this).empty().append(my_options);
 
 		// clearing any selections
