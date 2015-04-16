@@ -153,9 +153,13 @@
 					filter1.val(filter1.val() + '-');
 				}
 
+				setTimeout(function() {
+					select1[0].selectedIndex = 0
+				}, 10);
+
 				if (event.keyCode == 13) {
 					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
-						$('#animals_select_1 option').prop('selected', 'selected');
+						// $('#animals_select_1 option').prop('selected', 'selected');
 						var selectedItems = select1.find('option:selected');
 						select2.prepend(selectedItems);
 						select2.sort_select_box();
@@ -174,9 +178,13 @@
 					filter2.val(filter2.val() + '-');
 				}
 
+				setTimeout(function() {
+					select2[0].selectedIndex = 0
+				}, 10);
+
 				if (event.keyCode == 13) {
 					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
-						$('#animals_select_2 option').prop('selected', 'selected');
+						// $('#animals_select_2 option').prop('selected', 'selected');
 						var selectedItems = select2.find('option:selected');
 						select1.prepend(selectedItems);
 						select1.sort_select_box();
