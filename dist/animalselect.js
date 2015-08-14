@@ -147,20 +147,21 @@
 			});
 
 			// enter on filter
-			filter1.on("change keyup", function(event) {
+			filter1.on("change keydown", function(event) {
 				// automatic dash for valnr
 				if (event.keyCode != 8 && filter_type == "VALNR" && /^\d{2}$/.test(filter1.val())) {
 					filter1.val(filter1.val() + '-');
 				}
 
+				var selectedItems;
+
 				setTimeout(function() {
 					select1[0].selectedIndex = 0
+					selectedItems = select1.find('option:selected');
 				}, 10);
 
 				if (event.keyCode == 13) {
 					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
-						// $('#animals_select_1 option').prop('selected', 'selected');
-						var selectedItems = select1.find('option:selected');
 						select2.prepend(selectedItems);
 						select2.sort_select_box();
 						_.each(selectedItems, function(item, index) {
@@ -178,14 +179,15 @@
 					filter2.val(filter2.val() + '-');
 				}
 
+				var selectedItems;
+
 				setTimeout(function() {
 					select2[0].selectedIndex = 0
+					selectedItems = select2.find('option:selected');
 				}, 10);
 
 				if (event.keyCode == 13) {
 					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
-						// $('#animals_select_2 option').prop('selected', 'selected');
-						var selectedItems = select2.find('option:selected');
 						select1.prepend(selectedItems);
 						select1.sort_select_box();
 						_.each(selectedItems, function(item, index) {
@@ -390,18 +392,22 @@
 			});
 		}
 
-		$("body").on("keyup change", ".filter_left", function(event) {
-			$("#animals_select_1").html('');
-			var filteredLeft = filter_left(leftList);
-			fill_list($("#animals_select_1"), filteredLeft);
-			$("#numbers_left").html("(" + filteredLeft.length + ")");
+		$("body").on("keydown change", ".filter_left", function(event) {
+			setTimeout(function() {
+				$("#animals_select_1").html('');
+				var filteredLeft = filter_left(leftList);
+				fill_list($("#animals_select_1"), filteredLeft);
+				$("#numbers_left").html("(" + filteredLeft.length + ")");
+			}, 100);
 		});
 
-		$("body").on("keyup change", "#animals_filter_2", function(event) {
-			$("#animals_select_2").html('');
-			var filteredRight = filter_right(rightList, $("#animals_filter_2").val());
-			fill_list($("#animals_select_2"), filteredRight);
-			$("#numbers_right").html("(" + filteredRight.length + ")");
+		$("body").on("keyup change", ".filter_right", function(event) {
+			setTimeout(function() {
+				$("#animals_select_2").html('');
+				var filteredRight = filter_right(rightList, $("#animals_filter_2").val());
+				fill_list($("#animals_select_2"), filteredRight);
+				$("#numbers_right").html("(" + filteredRight.length + ")");
+			}, 100);
 		});
 
 		this.get_selected = function() {
