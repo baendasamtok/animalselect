@@ -66,7 +66,7 @@
 		var leftList = [];
 		var filteredLeft = [];
 		var rightList = [];
-		var filteredRight = [];
+		// var filteredRight = [];
 
 		set_listeners();
 
@@ -278,18 +278,18 @@
 			});
 		}
 
-		function filter_right(_list, value) {
+		// function filter_right(_list, value) {
 
-			if (value.length > 0) {
-				return _.filter(_list, function(animal) {
-					if (animal[filter_type].indexOf(value) > -1) {
-						return true;
-					}
-				});
-			} else {
-				return _list;
-			}
-		}
+		// 	if (value.length > 0) {
+		// 		return _.filter(_list, function(animal) {
+		// 			if (animal[filter_type].indexOf(value) > -1) {
+		// 				return true;
+		// 			}
+		// 		});
+		// 	} else {
+		// 		return _list;
+		// 	}
+		// }
 
 		function filter_left(_list) { // todo: implement a more dynamic way to deal with filters
 			var keys_values = get_keys_filter();
@@ -401,14 +401,14 @@
 			}, 100);
 		});
 
-		$("body").on("keyup change", ".filter_right", function(event) {
-			setTimeout(function() {
-				$("#animals_select_2").html('');
-				var filteredRight = filter_right(rightList, $("#animals_filter_2").val());
-				fill_list($("#animals_select_2"), filteredRight);
-				$("#numbers_right").html("(" + filteredRight.length + ")");
-			}, 100);
-		});
+		// $("body").on("keyup change", "#animals_select_2", function(event) {
+		// 	setTimeout(function() {
+		// 		$("#animals_select_2").html('');
+		// 		var filteredRight = filter_right(rightList, $("#animals_filter_2").val());
+		// 		fill_list($("#animals_select_2"), filteredRight);
+		// 		$("#numbers_right").html("(" + filteredRight.length + ")");
+		// 	}, 100);
+		// });
 
 		this.get_selected = function() {
 			return rightList;
