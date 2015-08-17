@@ -46,6 +46,17 @@
 
 		var selectedAnimals = null;
 
+		var ids = {};
+		ids.animals_filter_1 = "#animals_filter_1";
+		ids.animals_filter_2 = "#animals_filter_2";
+		ids.animals_select_1 = "#animals_select_1";
+		ids.animals_select_2 = "#animals_select_2";
+		ids.numbers_left = "#numbers_left";
+		ids.numbers_right = "#numbers_right";
+		ids.move_right = "#move_right";
+		ids.move_left = "#move_left";
+		ids.filter_left = ".filter_left";
+
 		if (options._template) {
 			template = options._template;
 		}
@@ -62,6 +73,10 @@
 			selectedAnimals = options._selected;
 		}
 
+		if (options._ids) {
+			ids = options._ids;
+		}
+
 		$(this).html(template);
 		var leftList = [];
 		var filteredLeft = [];
@@ -72,19 +87,19 @@
 
 		if (!options._service) {
 
-			fill_list($("#animals_select_1"), options._data, selectedAnimals);
+			fill_list($(ids.animals_select_1), options._data, selectedAnimals);
 			leftList = options._data;
-			$("#numbers_left").html("(" + leftList.length + ")");
+			$(ids.numbers_left).html("(" + leftList.length + ")");
 
 		} else {
 
 			$.getJSON(options._service, {
 				farm_id: options._farm_id
 			}).done(function(data) {
-				fill_list($("#animals_select_1"), data.herdlist, selectedAnimals);
+				fill_list($(ids.animals_select_1), data.herdlist, selectedAnimals);
 				leftList = data.herdlist;
-				$("#numbers_left").html("(" + leftList.length + ")");
-				$("#animals_select_1").trigger('loaded', data);
+				$(ids.numbers_left).html("(" + leftList.length + ")");
+				$(ids.animals_select_1).trigger('loaded', data);
 			});
 
 		}
@@ -100,13 +115,13 @@
 
 			if (_selected) {
 				_.each(_selected, function(item, index) {
-					$('#animals_select_1 option[value="' + item.NUMER + '"]').prop('selected', true);
+					$(ids.animals_select_1+' option[value="' + item.NUMER + '"]').prop('selected', true);
 					rightList.push(item);
 					leftList = remove_from_list(leftList, item.NUMER);
 				});
-				var selectedItems = $("#animals_select_1").find('option:selected');
-				$("#animals_select_2").prepend(selectedItems);
-				$("#animals_select_2").sort_select_box();
+				var selectedItems = $(ids.animals_select_1).find('option:selected');
+				$(ids.animals_select_2).prepend(selectedItems);
+				$(ids.animals_select_2).sort_select_box();
 			}
 
 		}
@@ -114,12 +129,12 @@
 
 		function set_listeners() {
 
-			filter1 = $("#animals_filter_1");
-			filter2 = $("#animals_filter_2");
-			select1 = $("#animals_select_1");
-			select2 = $("#animals_select_2");
-			right = $("#move_right");
-			left = $("#move_left");
+			filter1 = $(ids.animals_filter_1);
+			filter2 = $(ids.animals_filter_2);
+			select1 = $(ids.animals_select_1);
+			select2 = $(ids.animals_select_2);
+			right = $(ids.move_right);
+			left = $(ids.move_left);
 
 			// add zeroes to lambanumer
 			filter1.on("keydown", function(event) {
@@ -210,12 +225,12 @@
 					rightList = remove_from_list(rightList, $(item).val());
 				});
 
-				$("#numbers_left").html("(" + select1[0].length + ")");
+				$(ids.numbers_left).html("(" + select1[0].length + ")");
 
 				if (rightList.length === 0) {
-					$("#numbers_right").html("");
+					$(ids.numbers_right).html("");
 				} else {
-					$("#numbers_right").html("(" + rightList.length + ")");
+					$(ids.numbers_right).html("(" + rightList.length + ")");
 				}
 
 			});
@@ -230,12 +245,12 @@
 					leftList = remove_from_list(leftList, $(item).val());
 				});
 
-				$("#numbers_right").html("(" + rightList.length + ")");
+				$(ids.numbers_right).html("(" + rightList.length + ")");
 
 				if (select1[0].length === 0) {
-					$("#numbers_left").html("");
+					$(ids.numbers_left).html("");
 				} else {
-					$("#numbers_left").html("(" + select1[0].length + ")");
+					$(ids.numbers_left).html("(" + select1[0].length + ")");
 				}
 
 			});
@@ -249,12 +264,12 @@
 				rightList.push(find_animal(leftList, $(selectedItem).val()));
 				leftList = remove_from_list(leftList, $(selectedItem).val());
 
-				$("#numbers_right").html("(" + rightList.length + ")");
+				$(ids.numbers_right).html("(" + rightList.length + ")");
 
 				if (select1[0].length === 0) {
-					$("#numbers_left").html("");
+					$(ids.numbers_left).html("");
 				} else {
-					$("#numbers_left").html("(" + select1[0].length + ")");
+					$(ids.numbers_left).html("(" + select1[0].length + ")");
 				}
 
 			});
@@ -267,12 +282,12 @@
 				leftList.push(find_animal(rightList, $(selectedItem).val()));
 				rightList = remove_from_list(rightList, $(selectedItem).val());
 
-				$("#numbers_left").html("(" + select1[0].length + ")");
+				$(ids.numbers_left).html("(" + select1[0].length + ")");
 
 				if (rightList.length === 0) {
-					$("#numbers_right").html("");
+					$(ids.numbers_right).html("");
 				} else {
-					$("#numbers_right").html("(" + rightList.length + ")");
+					$(ids.numbers_right).html("(" + rightList.length + ")");
 				}
 
 			});
@@ -392,21 +407,21 @@
 			});
 		}
 
-		$("body").on("keydown change", ".filter_left", function(event) {
+		$("body").on("keydown change", ids.filter_left, function(event) {
 			setTimeout(function() {
-				$("#animals_select_1").html('');
+				$(ids.animals_select_1).html('');
 				var filteredLeft = filter_left(leftList);
-				fill_list($("#animals_select_1"), filteredLeft);
-				$("#numbers_left").html("(" + filteredLeft.length + ")");
+				fill_list($(ids.animals_select_1), filteredLeft);
+				$(ids.numbers_left).html("(" + filteredLeft.length + ")");
 			}, 100);
 		});
 
-		// $("body").on("keyup change", "#animals_select_2", function(event) {
+		// $("body").on("keyup change", ids.animals_select_2, function(event) {
 		// 	setTimeout(function() {
-		// 		$("#animals_select_2").html('');
-		// 		var filteredRight = filter_right(rightList, $("#animals_filter_2").val());
-		// 		fill_list($("#animals_select_2"), filteredRight);
-		// 		$("#numbers_right").html("(" + filteredRight.length + ")");
+		// 		$(ids.animals_select_2).html('');
+		// 		var filteredRight = filter_right(rightList, $(ids.animals_filter_2).val());
+		// 		fill_list($(ids.animals_select_2), filteredRight);
+		// 		$(ids.numbers_right).html("(" + filteredRight.length + ")");
 		// 	}, 100);
 		// });
 
