@@ -72,6 +72,8 @@ _filter_type : replaces the default filter type
 
 _selected : these animals are populating the second list on startup
 
+_ids : replaces the default IDs of several elements, necessary if more than one animalselect is being used on the same page, the default html template needs to be replaced if this option is used
+
 
 ### Methods :
 
