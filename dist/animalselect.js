@@ -100,7 +100,7 @@
 
 			if (_selected) {
 				_.each(_selected, function(item, index) {
-					$("#animals_select_1"+' option[value="' + item.NUMER + '"]').prop('selected', true);
+					$('#animals_select_1 option[value="' + item.NUMER + '"]').prop('selected', true);
 					rightList.push(item);
 					leftList = remove_from_list(leftList, item.NUMER);
 				});
@@ -114,12 +114,12 @@
 
 		function set_listeners() {
 
-			filter1 = $("#animals_filter_1");
-			filter2 = $("#animals_filter_2");
-			select1 = $("#animals_select_1");
-			select2 = $("#animals_select_2");
-			right = $("#move_right");
-			left = $("#move_left");
+			var filter1 = $("#animals_filter_1");
+			var filter2 = $("#animals_filter_2");
+			var select1 = $("#animals_select_1");
+			var select2 = $("#animals_select_2");
+			var right = $("#move_right");
+			var left = $("#move_left");
 
 			// add zeroes to lambanumer
 			filter1.on("keydown", function(event) {
