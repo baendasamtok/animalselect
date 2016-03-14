@@ -164,11 +164,19 @@
 					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
 						select2.prepend(selectedItems);
 						select2.sort_select_box();
+						select2.trigger("change");
 						_.each(selectedItems, function(item, index) {
 							rightList.push(find_animal(leftList, $(item).val()));
 							leftList = remove_from_list(leftList, $(item).val());
 						});
 						filter1.select();
+
+						if (rightList.length === 0) {
+							$("#numbers_right").html("");
+						} else {
+							$("#numbers_right").html("(" + rightList.length + ")");
+						}
+
 					}, 100);
 				}
 			});
@@ -190,11 +198,19 @@
 					setTimeout(function() { // timeout to give above listener time to add zeroes to lambanumer
 						select1.prepend(selectedItems);
 						select1.sort_select_box();
+						select1.trigger("change");
 						_.each(selectedItems, function(item, index) {
 							leftList.push(find_animal(rightList, $(item).val()));
 							rightList = remove_from_list(rightList, $(item).val());
 						});
 						filter2.select();
+
+						if (rightList.length === 0) {
+							$("#numbers_right").html("");
+						} else {
+							$("#numbers_right").html("(" + rightList.length + ")");
+						}
+						
 					}, 100);
 				}
 			});
@@ -205,6 +221,8 @@
 				var selectedItems = select2.find('option:selected');
 				select1.prepend(selectedItems);
 				select1.sort_select_box();
+				select1.trigger("change");
+				select2.trigger("change");
 				_.each(selectedItems, function(item, index) {
 					leftList.push(find_animal(rightList, $(item).val()));
 					rightList = remove_from_list(rightList, $(item).val());
@@ -225,6 +243,8 @@
 				var selectedItems = select1.find('option:selected');
 				select2.prepend(selectedItems);
 				select2.sort_select_box();
+				select2.trigger("change");
+				select1.trigger("change");
 				_.each(selectedItems, function(item, index) {
 					rightList.push(find_animal(leftList, $(item).val()));
 					leftList = remove_from_list(leftList, $(item).val());
@@ -246,6 +266,7 @@
 				select2.prepend(selectedItem);
 				select2.sort_select_box();
 				select2.trigger("change");
+				select1.trigger("change");
 				rightList.push(find_animal(leftList, $(selectedItem).val()));
 				leftList = remove_from_list(leftList, $(selectedItem).val());
 
@@ -264,6 +285,7 @@
 				select1.prepend(selectedItem);
 				select1.sort_select_box();
 				select1.trigger("change");
+				select2.trigger("change");
 				leftList.push(find_animal(rightList, $(selectedItem).val()));
 				rightList = remove_from_list(rightList, $(selectedItem).val());
 
